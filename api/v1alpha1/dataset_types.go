@@ -106,6 +106,18 @@ const (
 	CachedPercentage CacheStateName = "cachedPercentage"
 )
 
+// The cache phase indicates whether the loading is behaving
+type CachePhase string
+
+const (
+	// planning the cache
+	// Planning CachePhase = "planning"
+	// Loading the cache
+	Loading CachePhase = "loading"
+	// loaded the cache
+	Ready CachePhase = "ready"
+)
+
 // DatasetStatus defines the observed state of Dataset
 type DatasetStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
@@ -119,6 +131,8 @@ type DatasetStatus struct {
 
 	// CacheStatus represents the total resources of the dataset.
 	CacheStatus CacheStateList `json:"cacheStatus,omitempty"`
+
+	Phase CachePhase `json:"phase,omitempty"`
 }
 
 // +kubebuilder:object:root=true
