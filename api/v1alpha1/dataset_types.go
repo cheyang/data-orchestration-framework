@@ -115,8 +115,15 @@ const (
 	// Loading the cache
 	Loading CachePhase = "loading"
 	// loaded the cache
-	Ready CachePhase = "ready"
+	Loaded CachePhase = "loaded"
 )
+
+type CacheStatus struct {
+	// CacheStatus represents the total resources of the dataset.
+	CacheStates CacheStateList `json:"cacheStates,omitempty"`
+
+	Phase CachePhase `json:"phase,omitempty"`
+}
 
 // DatasetStatus defines the observed state of Dataset
 type DatasetStatus struct {
@@ -130,9 +137,7 @@ type DatasetStatus struct {
 	UfsTotal resource.Quantity `json:"ufsTotal,omitempty"`
 
 	// CacheStatus represents the total resources of the dataset.
-	CacheStatus CacheStateList `json:"cacheStatus,omitempty"`
-
-	Phase CachePhase `json:"phase,omitempty"`
+	CacheStatus CacheStatus `json:"cacheStatus,omitempty"`
 }
 
 // +kubebuilder:object:root=true
